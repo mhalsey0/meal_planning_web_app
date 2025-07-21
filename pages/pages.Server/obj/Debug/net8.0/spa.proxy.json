@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:63446",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/pages/pages.Server/../pages.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

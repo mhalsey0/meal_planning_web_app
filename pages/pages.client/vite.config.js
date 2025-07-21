@@ -16,6 +16,9 @@ const certificateName = "pages.client";
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
 const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
 
+console.log(certFilePath);
+console.log(keyFilePath);
+
 if (!fs.existsSync(baseFolder)) {
     fs.mkdirSync(baseFolder, { recursive: true });
 }
@@ -27,7 +30,7 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
         '--export-path',
         certFilePath,
         '--format',
-        'Pem',
+        'PEM',
         '--no-password',
     ], { stdio: 'inherit', }).status) {
         throw new Error("Could not create certificate.");
