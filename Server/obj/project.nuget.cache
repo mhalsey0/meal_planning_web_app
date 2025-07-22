@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ILA1uPj7KS8=",
+  "dgSpecHash": "5QQqT68t+ug=",
   "success": true,
-  "projectFilePath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/pages/pages.Server/pages.Server.csproj",
+  "projectFilePath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/Server/Server.csproj",
   "expectedPackageFiles": [
     "/Users/mhalsey/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/Users/mhalsey/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",

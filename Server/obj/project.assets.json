@@ -4644,11 +4644,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/pages/pages.Server/pages.Server.csproj",
-      "projectName": "pages.Server",
-      "projectPath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/pages/pages.Server/pages.Server.csproj",
+      "projectUniqueName": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/Server/Server.csproj",
+      "projectName": "Server",
+      "projectPath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/Server/Server.csproj",
       "packagesPath": "/Users/mhalsey/.nuget/packages/",
-      "outputPath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/pages/pages.Server/obj/",
+      "outputPath": "/Users/mhalsey/Documents/Projects/meal_planning_web_app/Server/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mhalsey/.nuget/NuGet/NuGet.Config"

@@ -1,6 +1,0 @@
-@pages.Server_HostAddress = http://localhost:5285
-
-GET {{pages.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
