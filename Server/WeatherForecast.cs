@@ -1,4 +1,4 @@
-namespace pages.Server
+namespace Server
 {
     public class WeatherForecast
     {

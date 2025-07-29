@@ -28,6 +28,20 @@ namespace Server
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.MapIdentityApi<ApplicationUser>();
+
+            app.MapPost("/logout", async (SignInManager<ApplicationUser> SignInManager) =>
+            {
+                await SignInManager.SignOutAsync();
+                return Results.Ok();
+
+            }).RequireAuthorization();
+
+            app.MapGet("/pingauth", (ClaimsPrincipal user) =>
+            {
+                var email = user.FindFirstValue(ClaimTypes.Email);
+                return Results.Json(new { Email = email }); ;
+            }).RequireAuthorization();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
