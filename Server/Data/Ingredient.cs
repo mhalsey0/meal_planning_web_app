@@ -1,29 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-
-namespace meal_Planning_Console
+namespace Server.Data
 {
-    public class Ingredient : DbContext, IQueryable 
+    public class Ingredient
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-        public double Amount { get; set; }
-        public string Unit { get; set; }
-        public string Description { get; set; }
+
         public string Name { get; set; }
+        public string? Description { get; set; }
 
-        public void Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Write()
-        {
-            throw new NotImplementedException();
-        }
+        // Navigations
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+        public ICollection<GroceryListItem> GroceryListItems { get; set; } = new List<GroceryListItem>();
     }
 }
