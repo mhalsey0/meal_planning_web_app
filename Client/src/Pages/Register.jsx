@@ -114,6 +114,14 @@ function Register() {
         <div>
           <button type="button" onClick={handleLoginClick}>Go to Login</button>
         </div>
+        <p>"Your password must be at least 6 characters and contain the following:"</p>
+        <ul>
+          <li>Uppercase letter</li>
+          <li>Lowercase letter</li>
+          <li>A number</li>
+          <li>A symbol e.g. !/?.%& etc...</li>
+        </ul>
+
       </form>
 
       {error && <p className="error">{error}</p>}
