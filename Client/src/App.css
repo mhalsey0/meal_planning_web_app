@@ -3,6 +3,71 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+/* Grid container for your home page */
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* 2 columns: sidebar, main (removed right sidebar) */
+    grid-template-rows: auto auto 1fr; /* 3 rows: navbar, search, content */
+    gap: 1rem;
+    min-height: 100vh;
+}
+
+/* Grid areas for better organization */
+.navbar {
+    grid-area: navbar;
+    grid-column: 1 / -1; /* Span all columns at the top */
+    grid-row: 1; /* First row */
+}
+
+.search {
+    grid-area: search;
+    grid-column: 1 / -1; /* Span all columns */
+    grid-row: 2; /* Second row */
+}
+
+.main-content {
+    grid-area: main-content;
+    grid-column: 2 / 3; /* Middle column */
+    grid-row: 3; /* Third row */
+}
+
+.logout {
+    grid-area: logout;
+    grid-column: 1 / 2; /* Left sidebar */
+    grid-row: 3; /* Third row */
+}
+
+/* Navigation item styles */
+.nav-item {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+/* Placeholder styles */
+.recipes-placeholder,
+.ingredients-placeholder {
+    padding: 2rem;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    color: #666;
+    font-size: 1.1rem;
 }
 
 th, td {
@@ -16,4 +81,50 @@ th, td {
     background-color: rgb(11, 10, 10);
     padding: 20px;
     text-align: left;
+}
+
+/* For a component that needs internal grid layout */
+.grid-component {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* For form layouts */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* For card layouts */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* Responsive grid layout */
+@media (max-width: 768px) {
+    .home-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+    
+    .main-content, .logout {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Grid with named areas alternative */
+.home-container-named-areas {
+    display: grid;
+    grid-template-areas: 
+        "navbar navbar"
+        "search search"
+        "logout main-content";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto auto 1fr;
+    gap: 1rem;
 }

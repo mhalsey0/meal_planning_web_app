@@ -1,16 +1,28 @@
 import React, {useState} from 'react'
-
-import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
-export default function Calendar() {
+
+import "./Calendar.css";
+
+function Calendar() {
+  const handleDateClick = () => {
+
+  }
   return (
-    <FullCalendar
-      plugins={[ dayGridPlugin ]}
-      initialView="dayGridMonth"
-    />
+    <div className="calendar-container">
+      <FullCalendar
+        plugins={[ dayGridPlugin, interactionPlugin ]}
+        initialView="dayGridMonth"
+        headerToolbar={{
+          start: "title",
+          center: "",
+          end: "today prev,next"
+        }}
+      />
+    </div>
   )
 }
 
+export default Calendar;
