@@ -11,10 +11,11 @@
 /* Grid container for your home page */
 .home-container {
     display: grid;
-    grid-template-columns: 1fr 3fr; /* 2 columns: sidebar, main (removed right sidebar) */
+    grid-template-columns: 1fr 3fr; /* 2 columns: sidebar, main */
     grid-template-rows: auto auto 1fr; /* 3 rows: navbar, search, content */
     gap: 1rem;
     min-height: 100vh;
+    position: relative;
 }
 
 /* Grid areas for better organization */
@@ -32,14 +33,24 @@
 
 .main-content {
     grid-area: main-content;
-    grid-column: 2 / 3; /* Middle column */
+    grid-column: 1 / 3; /* Middle column */
     grid-row: 3; /* Third row */
 }
 
 .logout {
-    grid-area: logout;
-    grid-column: 1 / 2; /* Left sidebar */
-    grid-row: 3; /* Third row */
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+}
+
+.logout:hover {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 /* Navigation item styles */
@@ -112,8 +123,15 @@ th, td {
         grid-template-rows: auto auto auto auto;
     }
     
-    .main-content, .logout {
+    .main-content {
         grid-column: 1 / -1;
+    }
+    
+    .logout {
+        bottom: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
     }
 }
 
@@ -123,7 +141,7 @@ th, td {
     grid-template-areas: 
         "navbar navbar"
         "search search"
-        "logout main-content";
+        "main-content main-content";
     grid-template-columns: 200px 1fr;
     grid-template-rows: auto auto 1fr;
     gap: 1rem;

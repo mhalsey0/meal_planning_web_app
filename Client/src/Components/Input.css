@@ -1,0 +1,107 @@
+.input-bar {
+    background-color: white;
+    width: 97%;
+    border-radius: 15px;
+    height: 2.5rem;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 5px #ddd;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    font-size: 1.25rem;
+    margin-left: 5px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#search-icon {
+    color: royalblue;
+}
+
+.search-bar {
+    background-color: white;
+    width: 97%;
+    border-radius: 15px;
+    height: 2.5rem;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 10px #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-loading {
+    text-align: center;
+    color: #666;
+    margin: 1rem 0;
+}
+
+.search-results {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-top: 0.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: #213547;
+}
+
+.search-result-item p {
+    margin: 0 0 0.5rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.recipe-ingredients {
+    margin-top: 0.5rem;
+}
+
+.recipe-ingredients strong {
+    color: #213547;
+    font-size: 0.9rem;
+}
+
+.recipe-ingredients ul {
+    margin: 0.25rem 0 0 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+.recipe-ingredients li {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}

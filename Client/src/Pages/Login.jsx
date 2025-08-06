@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   // state variables for email and passwords
@@ -46,7 +47,6 @@ function Login() {
       })
         .then((res) => {
           // handle success or error from the server
-          console.log(res);
           if (res.ok) {
             setError("Successful Login.");
             // SPA navigation
@@ -57,63 +57,57 @@ function Login() {
         })
         .catch((err) => {
           // handle network error
-          console.error(err);
           setError("Error Logging in.");
         });
     }
   };
 
   return (
-    <div className="containerbox">
-      <h3>Login</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className="forminput" htmlFor="email">Email:</label>
-        </div>
-        <div>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password:</label>
-        </div>
-        <div>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            id="rememberme"
-            name="rememberme"
-            checked={rememberme}
-            onChange={handleChange}
-          />
-          <span>Remember Me</span>
-        </div>
-
-        <div>
-          <button type="submit">Login</button>
-        </div>
-        <div>
-          {/* Prevents form submission when clicking Register */}
-          <button type="button" onClick={handleRegisterClick}>Register</button>
-        </div>
-      </form>
-      {error && <p className="error">{error}</p>}
-    </div>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h3 className="login-form-title">Login</h3>
+      <div className="login-form-section">
+        <input
+          className="login-form-input"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="login-form-section">
+        <input
+          className="login-form-input"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="login-form-checkbox-section">
+        <input
+          type="checkbox"
+          id="rememberme"
+          name="rememberme"
+          checked={rememberme}
+          onChange={handleChange}
+          className="login-form-checkbox"
+        />
+        <span className="login-form-checkbox-label">Remember Me</span>
+      </div>
+      <div className="login-form-section">
+        <button type="submit" className="login-form-btn login-form-btn-primary">Login</button>
+      </div>
+      <div className="login-form-section">
+        <button type="button" onClick={handleRegisterClick} className="login-form-btn login-form-btn-secondary">Register</button>
+      </div>
+      {error && <p className="login-form-error">{error}</p>}
+    </form>
   );
 }
 

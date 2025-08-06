@@ -1,0 +1,88 @@
+.login-form {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px #ddd;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem 2rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.login-form-title {
+  color: #213547;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.login-form-section {
+  margin-bottom: 1rem;
+}
+
+.login-form-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #eee;
+  font-size: 1.1rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+  transition: border-color 0.2s;
+}
+
+.login-form-input:focus {
+  outline: none;
+  border-bottom: 2px solid royalblue;
+}
+
+.login-form-checkbox-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.login-form-checkbox {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.login-form-checkbox-label {
+  color: #213547;
+  cursor: pointer;
+}
+
+.login-form-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.login-form-btn-primary {
+  background: royalblue;
+  color: white;
+}
+
+.login-form-btn-primary:hover {
+  background: #213547;
+}
+
+.login-form-btn-secondary {
+  background: #eee;
+  color: #213547;
+}
+
+.login-form-btn-secondary:hover {
+  background: #ddd;
+}
+
+.login-form-error {
+  color: crimson;
+  margin-top: 8px;
+  text-align: center;
+} 

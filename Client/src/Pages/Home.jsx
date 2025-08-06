@@ -6,6 +6,7 @@ import NavBar from "../Components/NavigationBar.jsx";
 import Calendar from "../Components/Calendar.jsx";
 import SearchBar from "../Components/Search.jsx";
 import ShoppingListTableView from "../Components/ShoppingListTableView.jsx";
+import RecipeForm from "../Components/RecipeForm.jsx";
 
 function Home() {
     const [activeView, setActiveView] = useState('calendar');
@@ -20,6 +21,8 @@ function Home() {
                 return <Calendar />;
             case 'shopping':
                 return <ShoppingListTableView />;
+            case 'recipeForm':
+                return <RecipeForm />;
             case 'recipes':
                 return <div className="recipes-placeholder">Recipes component coming soon...</div>;
             case 'ingredients':

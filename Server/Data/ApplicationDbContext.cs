@@ -8,13 +8,13 @@ namespace Server.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<GroceryList> GroceryLists { get; set; }
+        public required DbSet<Ingredient> Ingredients { get; set; }
+        public required DbSet<Recipe> Recipes { get; set; }
+        public required DbSet<GroceryList> GroceryLists { get; set; }
 
         // Join entities as suggested by ChatGPT to cover cases where different recipes have the same ingredient but different amounts
-        public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
-        public DbSet<GroceryListItem> GroceryListItems { get; set; }
+        public required DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public required DbSet<GroceryListItem> GroceryListItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -72,6 +72,18 @@ namespace Server.Data
             builder.Entity<GroceryListItem>()
                    .Property(gli => gli.Quantity)
                    .HasPrecision(18, 4);
+
+            builder.Entity<Recipe>()
+                .HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<GroceryList>()
+                .HasOne(gl => gl.User)
+                .WithMany()
+                .HasForeignKey(gl => gl.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -7,6 +7,10 @@ namespace Server.Data
 
         public string Name { get; set; }
 
+        // User association
+        public required string UserId { get; set; }
+        public required ApplicationUser User { get; set; }
+
         // Navigations
         public ICollection<GroceryListItem> Items { get; set; } = new List<GroceryListItem>();
     }

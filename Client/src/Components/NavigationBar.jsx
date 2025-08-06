@@ -1,5 +1,5 @@
 import React from 'react';
-import "./NavigationBar.css";
+
 
 export default function NavBar({ onViewChange, activeView }){
     const handleNavClick = (view) => {
@@ -21,6 +21,12 @@ export default function NavBar({ onViewChange, activeView }){
                 <p>Shopping Lists</p>
             </div>
             <div 
+                className={`nav-item ${activeView === 'recipeForm' ? 'active' : ''}`}
+                onClick={() => handleNavClick('recipeForm')}
+            >
+                <p>Add a Recipe</p>
+            </div>
+            {/* <div 
                 className={`nav-item ${activeView === 'recipes' ? 'active' : ''}`}
                 onClick={() => handleNavClick('recipes')}
             >
@@ -31,7 +37,7 @@ export default function NavBar({ onViewChange, activeView }){
                 onClick={() => handleNavClick('ingredients')}
             >
                 <p>Ingredients</p>
-            </div>
+            </div> */}
         </nav>
     )
 }

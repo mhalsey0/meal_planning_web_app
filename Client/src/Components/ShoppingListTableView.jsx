@@ -6,19 +6,28 @@ function ShoppingListTableView() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // TODO: Fetch shopping lists from API
-        // For now, using mock data
-        // const mockLists = [
-        //     { id: 1, name: 'Weekly Groceries', itemCount: 15 },
-        //     { id: 2, name: 'Party Shopping', itemCount: 8 },
-        //     { id: 3, name: 'Pantry Essentials', itemCount: 12 }
-        // ];
-        
-        setTimeout(() => {
-            setShoppingLists(mockLists);
-            setLoading(false);
-        }, 500);
+        fetchGroceryLists();
     }, []);
+
+    const fetchGroceryLists = async () => {
+        try {
+            const response = await fetch('/GroceryList', {
+                credentials: 'include'
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setShoppingLists(data);
+            } else {
+                console.error('Failed to fetch grocery lists');
+                setShoppingLists([]);
+            }
+        } catch (error) {
+            console.error('Error fetching grocery lists:', error);
+            setShoppingLists([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     if (loading) {
         return <div className="shopping-list-loading">Loading shopping lists...</div>;
@@ -27,15 +36,19 @@ function ShoppingListTableView() {
     return (
         <div className="shopping-list-container">
             <h2>Shopping Lists</h2>
-            <div className="shopping-lists-grid">
-                {shoppingLists.map(list => (
-                    <div key={list.id} className="shopping-list-card">
-                        <h3>{list.name}</h3>
-                        <p>{list.itemCount} items</p>
-                        <button className="view-list-btn">View List</button>
-                    </div>
-                ))}
-            </div>
+            {shoppingLists.length === 0 ? (
+                <p>No shopping lists found. Create one by selecting dates in the calendar!</p>
+            ) : (
+                <div className="shopping-lists-grid">
+                    {shoppingLists.map(list => (
+                        <div key={list.id} className="shopping-list-card">
+                            <h3>{list.name}</h3>
+                            <p>{list.items?.length || 0} items</p>
+                            <button className="view-list-btn">View List</button>
+                        </div>
+                    ))}
+                </div>
+            )}
             <button className="create-list-btn">Create New List</button>
         </div>
     );
