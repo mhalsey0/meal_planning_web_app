@@ -11,8 +11,8 @@ namespace Server.Data
         public string ServingSize { get; set; } = string.Empty;
 
         // User association
-        public required string UserId { get; set; }
-        public required ApplicationUser User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public ApplicationUser? User { get; set; }
 
         // Navigations
         public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();

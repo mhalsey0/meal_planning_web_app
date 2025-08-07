@@ -8,13 +8,12 @@ namespace Server.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
 
-        public required DbSet<Ingredient> Ingredients { get; set; }
         public required DbSet<Recipe> Recipes { get; set; }
-        public required DbSet<GroceryList> GroceryLists { get; set; }
-
-        // Join entities as suggested by ChatGPT to cover cases where different recipes have the same ingredient but different amounts
+        public required DbSet<Ingredient> Ingredients { get; set; }
         public required DbSet<RecipeIngredient> RecipeIngredients { get; set; }
+        public required DbSet<GroceryList> GroceryLists { get; set; }
         public required DbSet<GroceryListItem> GroceryListItems { get; set; }
+        public required DbSet<ScheduledMeal> ScheduledMeals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -77,13 +76,32 @@ namespace Server.Data
                 .HasOne(r => r.User)
                 .WithMany()
                 .HasForeignKey(r => r.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired(false);
 
             builder.Entity<GroceryList>()
                 .HasOne(gl => gl.User)
                 .WithMany()
                 .HasForeignKey(gl => gl.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure ScheduledMeal relationships
+            builder.Entity<ScheduledMeal>()
+                .HasOne(sm => sm.User)
+                .WithMany()
+                .HasForeignKey(sm => sm.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ScheduledMeal>()
+                .HasOne(sm => sm.Recipe)
+                .WithMany()
+                .HasForeignKey(sm => sm.RecipeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure CreatedDate default value for ScheduledMeal
+            builder.Entity<ScheduledMeal>()
+                .Property(sm => sm.CreatedDate)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

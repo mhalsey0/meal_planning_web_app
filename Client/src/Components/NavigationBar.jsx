@@ -14,12 +14,12 @@ export default function NavBar({ onViewChange, activeView }){
             >
                 <p>Calendar</p>
             </div>
-            <div 
+            {/* <div 
                 className={`nav-item ${activeView === 'shopping' ? 'active' : ''}`}
                 onClick={() => handleNavClick('shopping')}
             >
                 <p>Shopping Lists</p>
-            </div>
+            </div> */}
             <div 
                 className={`nav-item ${activeView === 'recipeForm' ? 'active' : ''}`}
                 onClick={() => handleNavClick('recipeForm')}

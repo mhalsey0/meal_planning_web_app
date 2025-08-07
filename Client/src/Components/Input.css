@@ -16,6 +16,7 @@ input {
     height: 100%;
     font-size: 1.25rem;
     margin-left: 5px;
+    color: #213547;
 }
 
 input:focus {
@@ -68,6 +69,22 @@ input:focus {
 
 .search-result-item:hover {
     background-color: #f8f9fa;
+}
+
+.search-result-item.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-result-item.clickable:hover {
+    background-color: #e3f2fd;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-result-item.clickable:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .search-result-item:last-child {

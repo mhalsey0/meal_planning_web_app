@@ -21,6 +21,8 @@ function SearchBar({ onRecipeSelect }) {
             });
             if (response.ok) {
                 const data = await response.json();
+                console.log('Search results:', data);
+                console.log('First recipe structure:', data[0]);
                 setResults(data);
             } else {
                 console.error('Search failed');
@@ -44,9 +46,34 @@ function SearchBar({ onRecipeSelect }) {
     }
 
     const handleRecipeClick = (recipe) => {
+        console.log('Recipe clicked:', recipe);
+        console.log('Recipe ID:', recipe.id);
+        console.log('Recipe name:', recipe.name);
+        
         if (onRecipeSelect) {
+            console.log('Calling onRecipeSelect with:', recipe);
             onRecipeSelect(recipe);
+        } else {
+            console.log('onRecipeSelect is not provided');
         }
+    }
+
+    const handleResultClick = (e, recipe) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Recipe result clicked:', recipe);
+        handleRecipeClick(recipe);
+        
+        // Add visual feedback
+        const element = e.currentTarget;
+        element.style.backgroundColor = '#4caf50';
+        element.style.color = 'white';
+        
+        // Reset after a short delay
+        setTimeout(() => {
+            element.style.backgroundColor = '';
+            element.style.color = '';
+        }, 200);
     }
 
     return (
@@ -65,8 +92,9 @@ function SearchBar({ onRecipeSelect }) {
                     {results.map((recipe) => (
                         <div 
                             key={recipe.id} 
-                            className="search-result-item"
-                            onClick={() => handleRecipeClick(recipe)}
+                            className="search-result-item clickable"
+                            onClick={(e) => handleResultClick(e, recipe)}
+                            style={{ cursor: 'pointer' }}
                         >
                             <h4>{recipe.name}</h4>
                             {recipe.description && <p>{recipe.description}</p>}

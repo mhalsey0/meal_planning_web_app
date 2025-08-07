@@ -99,28 +99,51 @@
     background-color: #45a049;
 }
 
-/* Remove button for events */
-.fc-event-title {
+.calendar-event {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 4px;
 }
 
+.calendar-event:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.event-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Remove button for events */
 .event-remove-btn {
-    background: rgba(255, 255, 255, 0.2);
+    background: transparent;
     border: none;
     color: white;
-    border-radius: 50%;
     width: 16px;
     height: 16px;
-    font-size: 10px;
+    font-size: 12px;
     cursor: pointer;
-    margin-left: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .event-remove-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.event-remove-btn:active {
+    background: rgba(255, 255, 255, 0.6);
 }

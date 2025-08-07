@@ -35,35 +35,62 @@ function RecipeForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(null);
+    
+    // Validate form
+    if (!form.name.trim()) {
+      setStatus('Error: Recipe name is required');
+      return;
+    }
+
+    // Validate ingredients
+    const validIngredients = ingredients.filter(ing => ing.name.trim() && ing.quantity);
+    if (validIngredients.length === 0) {
+      setStatus('Error: At least one ingredient with name and quantity is required');
+      return;
+    }
+
     try {
+      const requestData = {
+        name: form.name,
+        description: form.description,
+        instructions: form.instructions,
+        servingSize: form.servingSize,
+        ingredients: validIngredients.map(ing => ({
+          name: ing.name,
+          quantity: parseFloat(ing.quantity) || 0,
+          unit: ing.unit || '',
+          note: ing.note || ''
+        }))
+      };
+
+      console.log('Submitting recipe to /Recipe:', requestData);
+
       const response = await fetch('/Recipe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: form.name,
-          description: form.description,
-          instructions: form.instructions,
-          servingSize: form.servingSize,
-          ingredients: ingredients.map(ing => ({
-            name: ing.name,
-            quantity: parseFloat(ing.quantity) || 0,
-            unit: ing.unit,
-            note: ing.note
-          }))
-        }),
+        body: JSON.stringify(requestData),
         credentials: 'include', // send cookies for auth
       });
+      
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
       if (response.ok) {
+        const result = await response.json();
+        console.log('Recipe created:', result);
         setStatus('Recipe created successfully!');
         setForm({ name: '', description: '', instructions: '', servingSize: '' });
         setIngredients([{ name: '', quantity: '', unit: '', note: '' }]);
       } else {
-        const err = await response.text();
-        setStatus('Error: ' + err);
+        const errorText = await response.text();
+        console.error('Server error:', errorText);
+        console.error('Response URL:', response.url);
+        setStatus('Error: ' + errorText);
       }
     } catch (err) {
+      console.error('Network error:', err);
       setStatus('Error: ' + err.message);
     }
   };
@@ -120,7 +147,7 @@ function RecipeForm() {
             value={ing.note}
             onChange={e => handleIngredientChange(idx, e)}
           />
-          <button type="button" onClick={() => removeIngredient(idx)} disabled={ingredients.length === 1} className="recipe-form-remove-btn">-</button>
+          <button type="button" onClick={() => removeIngredient(idx)} disabled={ingredients.length === 1} className="recipe-form-remove-btn">X</button>
         </div>
       ))}
       <button type="button" onClick={addIngredient} className="recipe-form-add-btn">Add Ingredient</button>

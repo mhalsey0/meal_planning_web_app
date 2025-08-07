@@ -69,7 +69,19 @@ export default defineConfig({
             '^/logout': {
                 target,
                 secure: false
-            },                                    
+            },
+            '^/Recipe': {
+                target,
+                secure: false
+            },
+            '^/GroceryList': {
+                target,
+                secure: false
+            },
+            '^/ScheduledMeal': {
+                target,
+                secure: false
+            }
         },
         port: 63446,
         https: {
