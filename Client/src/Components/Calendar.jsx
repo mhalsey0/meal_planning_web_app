@@ -15,6 +15,12 @@ function Calendar() {
   const [groceryListDates, setGroceryListDates] = useState([]);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
+  // AI helped debug database persistence for calendar events.
+  // Including:
+  // - Loading scheduled meals from /ScheduledMeal API endpoint
+  // - Converting database records to FullCalendar event format
+  // - Error handling for failed API requests
+  // - Proper date formatting for calendar display
   // Load events from database on component mount
   useEffect(() => {
     const loadScheduledMeals = async () => {
@@ -68,17 +74,21 @@ function Calendar() {
   };
 
   const handleEventClick = (arg) => {
-    // Don't automatically remove events anymore - removal is handled by the "x" button
     console.log('Calendar: Event clicked:', arg.event.title);
-    // You could add other event click behaviors here if needed
   };
 
   const scheduleMeal = () => {
     console.log('Calendar: scheduleMeal called, selectedDate:', selectedDate);
     setShowSearch(true);
     setShowMenu(false);
-    // Don't clear selectedDate here - keep it for recipe selection
   };
+
+  // AI helped update removeMeal to delete scheduled meals from database instead of just local state.
+  // This includes:
+  // - DELETE request to /ScheduledMeal/{id} API endpoint
+  // - Extracting scheduled meal ID from event ID format
+  // - Error handling for failed deletion operations
+  // - User feedback for success/failure using browser alerts
 
   const removeMeal = async (eventId) => {
     console.log('Calendar: Removing meal with ID:', eventId);
@@ -109,73 +119,71 @@ function Calendar() {
     }
   };
 
-  const clearAllEvents = async () => {
-    console.log('Calendar: Clearing all events');
-    
-    // For now, we'll just clear the local state
-    // In a full implementation, you might want to add a bulk delete endpoint
-    setEvents([]);
-    
-    // Note: This doesn't clear from database - you'd need a bulk delete endpoint for that
-    console.log('Calendar: Cleared local events (database records remain)');
-  };
+  // TODO: implement grocery list feature.
+  // const selectDayForGroceryList = () => {
+  //   setGroceryListMode(true);
+  //   setGroceryListDates([selectedDate]);
+  //   setShowMenu(false);
+  // };
 
-  const selectDayForGroceryList = () => {
-    setGroceryListMode(true);
-    setGroceryListDates([selectedDate]);
-    setShowMenu(false);
-  };
-
-  const handleGroceryListDateSelect = (dateStr) => {
-    if (groceryListMode) {
-      const newDates = [...groceryListDates, dateStr];
-      setGroceryListDates(newDates);
+  // const handleGroceryListDateSelect = (dateStr) => {
+  //   if (groceryListMode) {
+  //     const newDates = [...groceryListDates, dateStr];
+  //     setGroceryListDates(newDates);
       
-      // If we have at least 2 dates, create the grocery list
-      if (newDates.length >= 2) {
-        createGroceryList(newDates);
-        setGroceryListMode(false);
-        setGroceryListDates([]);
-      }
-    }
-  };
+  //     // If we have at least 2 dates, create the grocery list
+  //     if (newDates.length >= 2) {
+  //       createGroceryList(newDates);
+  //       setGroceryListMode(false);
+  //       setGroceryListDates([]);
+  //     }
+  //   }
+  // };
 
-  const createGroceryList = async (dateRange) => {
-    try {
-      // Get recipe IDs from events in the date range
-      const recipeIds = events
-        .filter(event => 
-          event.extendedProps.type === 'meal' && 
-          dateRange.includes(event.startStr.split('T')[0])
-        )
-        .map(event => event.extendedProps.recipeId);
+  // const createGroceryList = async (dateRange) => {
+  //   try {
+  //     // Get recipe IDs from events in the date range
+  //     const recipeIds = events
+  //       .filter(event => 
+  //         event.extendedProps.type === 'meal' && 
+  //         dateRange.includes(event.startStr.split('T')[0])
+  //       )
+  //       .map(event => event.extendedProps.recipeId);
 
-      if (recipeIds.length === 0) {
-        alert('No meals found in the selected date range.');
-        return;
-      }
+  //     if (recipeIds.length === 0) {
+  //       alert('No meals found in the selected date range.');
+  //       return;
+  //     }
 
-      const response = await fetch('/GroceryList/build', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(recipeIds),
-        credentials: 'include',
-      });
+  //     const response = await fetch('/GroceryList/build', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(recipeIds),
+  //       credentials: 'include',
+  //     });
 
-      if (response.ok) {
-        alert('Grocery list created successfully!');
-        // You might want to update the shopping lists component here
-      } else {
-        alert('Failed to create grocery list.');
-      }
-    } catch (error) {
-      console.error('Error creating grocery list:', error);
-      alert('Error creating grocery list.');
-    }
-  };
+  //     if (response.ok) {
+  //       alert('Grocery list created successfully!');
+  //       // You might want to update the shopping lists component here
+  //     } else {
+  //       alert('Failed to create grocery list.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error creating grocery list:', error);
+  //     alert('Error creating grocery list.');
+  //   }
+  // };
 
+  
+  // AI helped update handleRecipeSelect to save scheduled meals to database instead of localStorage.
+  // This includes:
+  // - POST request to /ScheduledMeal API endpoint
+  // - Converting saved meal response to calendar event format
+  // - Error handling for failed database operations
+  // - Success/error user feedback
+  // - Proper async/await pattern for API calls
   const handleRecipeSelect = async (recipe) => {
     console.log('Calendar: handleRecipeSelect called with:', recipe);
     console.log('Calendar: selectedDate is:', selectedDate);
@@ -226,7 +234,6 @@ function Calendar() {
             return updatedEvents;
           });
           
-          // Show success message
           alert(`"${recipe.name}" has been scheduled for ${selectedDate}!`);
           
           closeSearchModal();
@@ -254,7 +261,7 @@ function Calendar() {
   const closeMenu = () => {
     console.log('Calendar: closeMenu called, showSearch:', showSearch, 'selectedDate:', selectedDate);
     setShowMenu(false);
-    // Only clear selectedDate if we're not transitioning to search
+    // Only clear selectedDate if we're not transitioning to search otherwise schedule a meal form won't have a date and throw an error
     if (!showSearch) {
       setSelectedDate(null);
     }

@@ -1,3 +1,14 @@
+
+// AI helped create the ScheduledMealController to provide API endpoints for calendar persistence.
+// This controller includes:
+// - Suggesting DTO design pattern for many to many relationships
+// - GET endpoint to retrieve user's scheduled meals
+// - POST endpoint to create new scheduled meals with validation
+// - DELETE endpoint to remove scheduled meals
+// - Proper authentication and user isolation
+// - DTOs for clean data transfer
+// - Error handling and logging
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

@@ -13,6 +13,8 @@ namespace Server.Data
         public required DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public required DbSet<GroceryList> GroceryLists { get; set; }
         public required DbSet<GroceryListItem> GroceryListItems { get; set; }
+
+        // AI helped add the ScheduledMeals DbSet to enable database persistence for calendar events
         public required DbSet<ScheduledMeal> ScheduledMeals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -85,7 +87,10 @@ namespace Server.Data
                 .HasForeignKey(gl => gl.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Configure ScheduledMeal relationships
+            // Configure GroceryListItem composite key
+            builder.Entity<GroceryListItem>()
+                .HasKey(gl => new { gl.GroceryListId, gl.IngredientId });
+
             builder.Entity<ScheduledMeal>()
                 .HasOne(sm => sm.User)
                 .WithMany()

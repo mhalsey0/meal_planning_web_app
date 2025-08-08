@@ -14,7 +14,7 @@ function Home() {
     const handleViewChange = (view) => {
         setActiveView(view);
     };
-
+    // AI suggested using states to manage navigation in my SPA. 
     const renderActiveComponent = () => {
         switch (activeView) {
             case 'calendar':
@@ -23,10 +23,10 @@ function Home() {
                 return <ShoppingListTableView />;
             case 'recipeForm':
                 return <RecipeForm />;
-            case 'recipes':
-                return <div className="recipes-placeholder">Recipes component coming soon...</div>;
-            case 'ingredients':
-                return <div className="ingredients-placeholder">Ingredients component coming soon...</div>;
+            // case 'recipes':
+            //     return <div className="recipes-placeholder">Recipes component coming soon...</div>;
+            // case 'ingredients':
+            //     return <div className="ingredients-placeholder">Ingredients component coming soon...</div>;
             default:
                 return <Calendar />;
         }
