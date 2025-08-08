@@ -22,3 +22,5 @@ A user based meal planning calendar that allows the creation of custom recipes a
 8. Select a recipe.
 
 To remove a recipe, simply click the "X" next to the recipe that you want to remove. You may log out by clicking on the logout button in the bottom right corner.
+
+Claude-3.5-sonnet was used in the process of building this project for design suggestions, testing, and debugging. Specific comments within the code denotes where AI generated code was used.
