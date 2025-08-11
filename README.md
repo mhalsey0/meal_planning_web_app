@@ -12,7 +12,7 @@ A user based meal planning calendar that allows the creation of custom recipes a
 
 ## How to Use
 
-1. Install dependendencies by navigating to the Client directory and running `cd ../Client && npm install` in your terminal.
+1. Install dependendencies by navigating to the Client directory and running `npm install` in your terminal.
 2. Navigate to the Server directory and run `dotnet run`.
 3. copy and paste the exposed port that is published in the terminal to your browser.
 4. Follow the instructions to create your account.
