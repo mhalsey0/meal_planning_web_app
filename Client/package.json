@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node ./src/Scripts/dependencies.cjs",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -12,7 +11,8 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

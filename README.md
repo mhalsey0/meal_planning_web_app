@@ -12,14 +12,15 @@ A user based meal planning calendar that allows the creation of custom recipes a
 
 ## How to Use
 
-1. Navigate to the Server directory and run `dotnet run`.
-2. copy and paste the exposed port that is published in the terminal to your browser.
-3. Follow the instructions to create your account.
-4. Log in.
-5. Add a recipe by clicking on "Add a Recipe" and follow the instructions in the form.
-6. Click on "Calendar", then click on a day and select "Schedule a Meal".
-7. Search for the recipe that you added.
-8. Select a recipe.
+1. Install dependendencies by navigating to the Client directory and running `cd ../Client && npm install` in your terminal.
+2. Navigate to the Server directory and run `dotnet run`.
+3. copy and paste the exposed port that is published in the terminal to your browser.
+4. Follow the instructions to create your account.
+5. Log in.
+6. Add a recipe by clicking on "Add a Recipe" and follow the instructions in the form.
+7. Click on "Calendar", then click on a day and select "Schedule a Meal".
+8. Search for the recipe that you added.
+9. Select a recipe.
 
 To remove a recipe, simply click the "X" next to the recipe that you want to remove. You may log out by clicking on the logout button in the bottom right corner.
 
