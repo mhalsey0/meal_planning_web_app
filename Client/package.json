@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node ./scripts/dependencies.cjs",
+    "predev": "node ./src/Scripts/dependencies.cjs",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
